@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MagicalTic-Tac-Toe</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
 </head>
 <body>
     <h1>Spellbinding 4-in-a-Row: The Wizard's Duel</h1>
     <div id="player-selection">
-      <button id="snake">🐍</button>
-      <button id="lion">🦁</button>
-      <button id="unicorn">🦡</button>
-      <button id="dragon">🐦‍⬛</button>
-  </div>
+      <button class="player" id="Slytherin">🐍</button>
+      <button class="player" id="Gryffindor">🦁</button>
+      <button class="player" id="Hufflepuff">🦡</button>
+      <button class="player" id="Ravenclaw">🐦‍⬛</button>
+    </div>
     <div id="game">
       <div class="board">
         <div class="row">
@@ -22,30 +21,29 @@
           <div class="cell" id="cell-1"></div>
           <div class="cell" id="cell-2"></div>
           <div class="cell" id="cell-3"></div>
-      </div>
-      <div class="row">
+        </div>
+        <div class="row">
           <div class="cell" id="cell-4"></div>
           <div class="cell" id="cell-5"></div>
           <div class="cell" id="cell-6"></div>
           <div class="cell" id="cell-7"></div>
-      </div>
-      <div class="row">
+        </div>
+        <div class="row">
           <div class="cell" id="cell-8"></div>
           <div class="cell" id="cell-9"></div>
           <div class="cell" id="cell-10"></div>
           <div class="cell" id="cell-11"></div>
-      </div>
-      <div class="row">
+        </div>
+        <div class="row">
           <div class="cell" id="cell-12"></div>
           <div class="cell" id="cell-13"></div>
           <div class="cell" id="cell-14"></div>
           <div class="cell" id="cell-15"></div>
+        </div>
       </div>
-  </div>
       <div id="message">Player <span id="current-player">🐍</span>'s turn</div>
       <button id="reset">Reset Game</button>
-  </div>
-  <script src="script.js"></script>
-</body>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
