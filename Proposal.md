@@ -2,7 +2,7 @@
 
 ## Project Choice (Tell us which project you're doing!)
 
-- Tic-Tac-Toe
+- Connect 4
 
 ## Project Description 
 
@@ -10,28 +10,27 @@ Magical Tic Tac Toe uses the mascots of the Hogwarts houses:
 Gryffindor: Lion
 Slytherin: Serpent
 Hufflepuff: Badger
-Ravenclaw: Eagle
+Ravenclaw: Black bird
 Instead of X's and O's. So, players would take turns placing their respective house mascots on the grid, aiming to get four of their house mascots in a row horizontally, vertically, or diagonally to win the game. 
 
 ## Wire Frames
 
 **Initial Landing View**
 
-![image](https://media.git.generalassemb.ly/user/21811/files/0f7aee00-c1d9-11ea-9dad-de086a5c91fc)
+![image](file:///Users/mayagersten/Desktop/PROPOSAL%20IMG.png)
 
 **Results View**
 
-![image](https://media.git.generalassemb.ly/user/21811/files/1a358300-c1d9-11ea-95da-6c14aefb0f18)
+![image](file:///Users/mayagersten/Desktop/PROPOSAL%20IMG.png)
 
 ## User Stories
 
 #### MVP Goals
 
-- As a player, I want my game to recognize three ticks in a row so that I know who won.
-- As a player, I would like to be informed when the game is over due to a tie.
+- As a player, I want my game to recognize four ticks in a row so that I know who won.
+- As a player, I would like to be informed when the game is over due to a tie, win or loss.
 - As a player, I would like to know whose turn it is so that I don't have to keep track.
 - As a player, I would like to be informed with some indication when I mark a game box so that I know my selection worked.
-- As a player who requires assistive technologies, I would like accessibility features so that I'm not left out of enjoying the game.
 - As a player I would like to be able to restart the game after a win, loss or tie.
 - As a player, I want the UI to be engaging and out of the way so that I enjoy the experience of playing the game.\*\*
 
@@ -41,6 +40,8 @@ Instead of X's and O's. So, players would take turns placing their respective ho
 - As a player, I would like to hear an audible sound when I mark a game box so that I know my selection worked.
 - As a player, I would like to play this game online so that I don't have to have my challenger sitting next to me.
 - As a player who wants to dominate the battlefield I want to become the ultimate tic tac toe tactician so I can beat all of my opponents
+- As a player who requires assistive technologies, I would like accessibility features so that I'm not left out of enjoying the game with timer.
+- Choosing a borad size.
 
 #### Notionboard Template
 Notionboard template for building projects ( You can use this for any project )
@@ -55,13 +56,9 @@ https://www.tablesgenerator.com/markdown_tables
 Do not neglect to plan, you will thank yourself later for being proactive!
 | Day        |   | Task                               | Blockers | Notes/ Thoughts |
 |------------|---|------------------------------------|----------|-----------------|
-| Thursday   |   | Create and present proposal        |          |                 |
-| Friday     |   | Create html, js, css files         |          |                 |
-| Saturday   |   | Create basic scaffolding           |          |                 |
-| Sunday     |   | Add functionality                  |          |                 |
-| Monday     |   | Add styling                        |          |                 |
-| Tuesday    |   | Finaliza MVP                       |          |                 |
-| Wedenesday |   | Work on stretch goals              |          |                 |
-| Thursday   |   | Work on icebox items if applicable |          |                 |
-| Friday     |   | Presentation Day!                  |          |                 |
-|            |   |                                    |          |                 |
+| Monday   |   | Create and present proposal, Create html, js, css files        |          |                 |
+| Tuesday     |   | Create basic scaffolding, Add functionality           |          |                 |
+| Wednesday   |   | Add functionality,  Add styling,           |          |                 |
+| Thursday     |   | Finaliza MVP                       |          |                 |
+| Friday     |   |  Work on stretch goals, Presentation Day!                          |          |                 |
+
