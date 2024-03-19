@@ -56,23 +56,15 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (checkTie()) {
                 messageDisplay.innerText = "It's a tie!";
             } else {
-                currentPlayer = currentPlayer === "Slytherin" ? "Gryffindor" : currentPlayer === "Gryffindor" ? "Hufflepuff" : currentPlayer === "Hufflepuff" ? "Ravenclaw" : "Computer";
-                if (currentPlayer === "Computer") {
-                    setTimeout(computerMove, 500);
-                } else {
-                    messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
-                }
+                currentPlayer = "Computer";
+                setTimeout(computerMove, 500);
             }
         }
     }
     
     function resetGame() {
         initializeGame();
-        if (currentPlayer === "Computer") {
-            messageDisplay.innerText = `Computer's turn`;
-        } else {
-            messageDisplay.innerText = `Player's turn`;
-        }
+        messageDisplay.innerText = `Player's turn`;
     }
 
     function disableCells() {
@@ -80,14 +72,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function selectPlayer(event) {
-        currentPlayer = event.target.id;
+        currentPlayer = event.target.innerText;
         gameContainer.style.display = "block";
         messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
         playerButtons.forEach(button => button.style.display = "none");
         resetButton.style.display = "block";
-        if (currentPlayer === "Computer") {
-            setTimeout(computerMove, 500); 
-        }
     }
 
     function computerMove() {
@@ -95,20 +84,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (emptyCells.length > 0) {
             const randomIndex = Math.floor(Math.random() * emptyCells.length);
             const selectedCell = emptyCells[randomIndex];
-            const emojis = ["🐍", "🦁", "🦡", "🐦‍⬛"];
-            let randomEmoji;
-            do {
-                randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-            } while (randomEmoji === currentPlayer); 
-            selectedCell.innerText = randomEmoji;
+            selectedCell.innerText = currentPlayer;
             if (checkWin()) {
                 messageDisplay.innerText = "Computer wins!";
                 disableCells();
             } else if (checkTie()) {
                 messageDisplay.innerText = "It's a tie!";
             } else {
-                currentPlayer = "Slytherin"; 
-                messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
+                currentPlayer = "Player";
+                messageDisplay.innerText = `Player's turn`;
             }
         }
     }
