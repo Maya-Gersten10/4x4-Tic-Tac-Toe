@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const resetButton = document.getElementById("reset");
     let currentPlayerEmoji = "";
     let currentPlayerHouse = "";
+    let computerEmoji = "";
     let cells = [];
     let playerTurn = true;
 
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         cells = document.querySelectorAll(".cell");
         currentPlayerEmoji = "";
         currentPlayerHouse = "";
+        computerEmoji = "";
         cells.forEach(cell => {
             cell.innerText = "";
             cell.addEventListener("click", handleCellClick); 
@@ -85,6 +87,10 @@ document.addEventListener("DOMContentLoaded", function() {
         messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
         playerButtons.forEach(button => button.style.display = "none");
         resetButton.style.display = "block";
+        // Randomly select emoji for computer
+        const emojis = Array.from(playerButtons).map(button => button.innerText);
+        emojis.splice(emojis.indexOf(currentPlayerEmoji), 1);
+        computerEmoji = emojis[Math.floor(Math.random() * emojis.length)];
     }
 
     function computerMove() {
@@ -92,8 +98,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (emptyCells.length > 0) {
             const randomIndex = Math.floor(Math.random() * emptyCells.length);
             const selectedCell = emptyCells[randomIndex];
-            let availableEmojis = Array.from(playerButtons).map(button => button.innerText).filter(emoji => emoji !== currentPlayerEmoji);
-            const computerEmoji = availableEmojis[Math.floor(Math.random() * availableEmojis.length)];
             selectedCell.innerText = computerEmoji;
             if (checkWin()) {
                 messageDisplay.innerText = "Computer wins!";
