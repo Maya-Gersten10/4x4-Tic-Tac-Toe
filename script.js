@@ -3,12 +3,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const gameContainer = document.getElementById("game");
     const messageDisplay = document.getElementById("message");
     const resetButton = document.getElementById("reset");
-    let currentPlayer = "";
+    let currentPlayerEmoji = "";
+    let currentPlayerHouse = "";
     let cells = [];
+    let playerTurn = true;
 
     function initializeGame() {
         cells = document.querySelectorAll(".cell");
-        currentPlayer = "";
+        currentPlayerEmoji = "";
+        currentPlayerHouse = "";
         cells.forEach(cell => {
             cell.innerText = "";
             cell.addEventListener("click", handleCellClick); 
@@ -16,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         gameContainer.style.display = "none";
         playerButtons.forEach(button => button.style.display = "block");
         resetButton.style.display = "none";
+        playerTurn = true;
     }
 
     function checkWin() {
@@ -46,17 +50,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function handleCellClick(event) {
+        if (!playerTurn) return; 
         const clickedCell = event.target;
-        const index = parseInt(clickedCell.id.split("-")[1]);
-        if (clickedCell.innerText === "" && currentPlayer !== "") {
-            clickedCell.innerText = currentPlayer;
+        if (clickedCell.innerText === "" && currentPlayerEmoji !== "") {
+            clickedCell.innerText = currentPlayerEmoji;
             if (checkWin()) {
-                messageDisplay.innerText = `Player ${currentPlayer} wins!`;
+                messageDisplay.innerText = `${currentPlayerHouse} wins!`;
                 disableCells();
             } else if (checkTie()) {
                 messageDisplay.innerText = "It's a tie!";
             } else {
-                currentPlayer = "Computer";
+                currentPlayerEmoji = currentPlayerEmoji;
+                currentPlayerHouse = currentPlayerHouse;
+                messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
+                playerTurn = false; 
                 setTimeout(computerMove, 500);
             }
         }
@@ -72,9 +79,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function selectPlayer(event) {
-        currentPlayer = event.target.innerText;
+        currentPlayerEmoji = event.target.innerText;
+        currentPlayerHouse = currentPlayerEmoji === "🐍" ? "Slytherin" : currentPlayerEmoji === "🦁" ? "Gryffindor" : currentPlayerEmoji === "🦡" ? "Hufflepuff" : "Ravenclaw";
         gameContainer.style.display = "block";
-        messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
+        messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
         playerButtons.forEach(button => button.style.display = "none");
         resetButton.style.display = "block";
     }
@@ -84,15 +92,19 @@ document.addEventListener("DOMContentLoaded", function() {
         if (emptyCells.length > 0) {
             const randomIndex = Math.floor(Math.random() * emptyCells.length);
             const selectedCell = emptyCells[randomIndex];
-            selectedCell.innerText = currentPlayer;
+            let availableEmojis = Array.from(playerButtons).map(button => button.innerText).filter(emoji => emoji !== currentPlayerEmoji);
+            const computerEmoji = availableEmojis[Math.floor(Math.random() * availableEmojis.length)];
+            selectedCell.innerText = computerEmoji;
             if (checkWin()) {
                 messageDisplay.innerText = "Computer wins!";
                 disableCells();
             } else if (checkTie()) {
                 messageDisplay.innerText = "It's a tie!";
             } else {
-                currentPlayer = "Player";
-                messageDisplay.innerText = `Player's turn`;
+                currentPlayerEmoji = currentPlayerEmoji;
+                currentPlayerHouse = currentPlayerHouse;
+                messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
+                playerTurn = true; 
             }
         }
     }
