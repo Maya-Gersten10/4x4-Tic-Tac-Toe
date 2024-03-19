@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function handleCellClick(event) {
         const clickedCell = event.target;
-        const index = Array.from(cells).indexOf(clickedCell);
+        const index = parseInt(clickedCell.id.split("-")[1]);
         if (clickedCell.innerText === "" && currentPlayer !== "") {
             clickedCell.innerText = currentPlayer;
             if (checkWin()) {
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 currentPlayer = currentPlayer === "Slytherin" ? "Gryffindor" : currentPlayer === "Gryffindor" ? "Hufflepuff" : currentPlayer === "Hufflepuff" ? "Ravenclaw" : "Computer";
                 if (currentPlayer === "Computer") {
-                    setTimeout(computerMove, 500); // Delay for the computer's move
+                    setTimeout(computerMove, 500);
                 } else {
                     messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
                 }
