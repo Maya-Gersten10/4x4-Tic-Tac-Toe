@@ -44,3 +44,43 @@ body {
 #reset:hover {
   background-color: #8a0f9b;
 }
+
+#Slytherin {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #00a537;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+#Gryffindor {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #eb0101;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+#Hufflepuff {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #f0e406;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+#Ravenclaw {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #2001eb;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 30px;
+}

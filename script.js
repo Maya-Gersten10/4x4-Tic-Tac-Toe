@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         currentPlayer = "";
         cells.forEach(cell => {
             cell.innerText = "";
-            cell.addEventListener("click", cellClickHandler); 
+            cell.addEventListener("click", handleCellClick); 
         });
         gameContainer.style.display = "none";
         playerButtons.forEach(button => button.style.display = "block");
@@ -47,24 +47,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function handleCellClick(event) {
         const clickedCell = event.target;
-        const index = Array.from(clickedCell.parentNode.children).indexOf(clickedCell);
-        if (cells[index].innerText === "" && currentPlayer !== "") {
-            cells[index].innerText = currentPlayer;
+        const index = Array.from(cells).indexOf(clickedCell);
+        if (clickedCell.innerText === "" && currentPlayer !== "") {
+            clickedCell.innerText = currentPlayer;
             if (checkWin()) {
                 messageDisplay.innerText = `Player ${currentPlayer} wins!`;
                 disableCells();
             } else if (checkTie()) {
                 messageDisplay.innerText = "It's a tie!";
             } else {
-                currentPlayer = currentPlayer === "Slytherin" ? "Gryffindor" : currentPlayer === "Gryffindor" ? "Hufflepuff" : "Ravenclaw";
-                messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
+                currentPlayer = currentPlayer === "Slytherin" ? "Gryffindor" : currentPlayer === "Gryffindor" ? "Hufflepuff" : currentPlayer === "Hufflepuff" ? "Ravenclaw" : "Computer";
+                if (currentPlayer === "Computer") {
+                    setTimeout(computerMove, 500); // Delay for the computer's move
+                } else {
+                    messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
+                }
             }
         }
     }
-
+    
     function resetGame() {
         initializeGame();
-        messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
+        if (currentPlayer === "Computer") {
+            messageDisplay.innerText = `Computer's turn`;
+        } else {
+            messageDisplay.innerText = `Player's turn`;
+        }
     }
 
     function disableCells() {
@@ -77,6 +85,32 @@ document.addEventListener("DOMContentLoaded", function() {
         messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
         playerButtons.forEach(button => button.style.display = "none");
         resetButton.style.display = "block";
+        if (currentPlayer === "Computer") {
+            setTimeout(computerMove, 500); 
+        }
+    }
+
+    function computerMove() {
+        let emptyCells = Array.from(cells).filter(cell => cell.innerText === "");
+        if (emptyCells.length > 0) {
+            const randomIndex = Math.floor(Math.random() * emptyCells.length);
+            const selectedCell = emptyCells[randomIndex];
+            const emojis = ["🐍", "🦁", "🦡", "🐦‍⬛"];
+            let randomEmoji;
+            do {
+                randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            } while (randomEmoji === currentPlayer); 
+            selectedCell.innerText = randomEmoji;
+            if (checkWin()) {
+                messageDisplay.innerText = "Computer wins!";
+                disableCells();
+            } else if (checkTie()) {
+                messageDisplay.innerText = "It's a tie!";
+            } else {
+                currentPlayer = "Slytherin"; 
+                messageDisplay.innerText = `Player ${currentPlayer}'s turn`;
+            }
+        }
     }
 
     playerButtons.forEach(button => button.addEventListener("click", selectPlayer));
