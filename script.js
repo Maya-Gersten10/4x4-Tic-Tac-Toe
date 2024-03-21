@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const emojis = Array.from(playerButtons).map(button => button.innerText);
         emojis.splice(emojis.indexOf(currentPlayerEmoji), 1);
         computerEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-        computerHouse = emojiToHouse[computerEmoji]; // Set computer's house here
+        computerHouse = emojiToHouse[computerEmoji]; 
     }
 
     function updateTurnMessage() {
