@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentPlayerEmoji = "";
     let currentPlayerHouse = "";
     let computerEmoji = "";
+    let computerHouse = "";
     let cells = [];
     let playerTurn = true;
 
@@ -60,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function resetGame() {
         initializeGame();
-        messageDisplay.innerText = `Player's turn`;
+        messageDisplay.innerText = `Select your house to start`;
     }
 
     function disableCells() {
@@ -71,12 +72,22 @@ document.addEventListener("DOMContentLoaded", function () {
         currentPlayerEmoji = event.target.innerText;
         currentPlayerHouse = emojiToHouse[currentPlayerEmoji];
         gameContainer.style.display = "block";
-        messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
+        updateTurnMessage();
         playerButtons.forEach(button => button.style.display = "none");
         resetButton.style.display = "block";
         const emojis = Array.from(playerButtons).map(button => button.innerText);
         emojis.splice(emojis.indexOf(currentPlayerEmoji), 1);
         computerEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+        computerHouse = emojiToHouse[computerEmoji]; // Set computer's house here
+    }
+
+    function updateTurnMessage() {
+        if (playerTurn) {
+            messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
+        } else {
+            messageDisplay.innerText = `${computerHouse}'s turn`;
+            setTimeout(computerMove, 500);
+        }
     }
 
     function handleCellClick(event) {
@@ -90,11 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (checkTie()) {
                 messageDisplay.innerText = "It's a tie!";
             } else {
-                currentPlayerEmoji = currentPlayerEmoji;
-                currentPlayerHouse = currentPlayerHouse;
-                messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
                 playerTurn = false;
-                setTimeout(computerMove, 500);
+                updateTurnMessage();
             }
         }
     }
@@ -111,13 +119,13 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (checkTie()) {
                 messageDisplay.innerText = "It's a tie!";
             } else {
-                currentPlayerEmoji = currentPlayerEmoji;
-                currentPlayerHouse = currentPlayerHouse;
-                messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
                 playerTurn = true;
+                updateTurnMessage();
             }
         }
     }
+
+    messageDisplay.innerText = "Select your house to start";
 
     playerButtons.forEach(button => button.addEventListener("click", selectPlayer));
 
