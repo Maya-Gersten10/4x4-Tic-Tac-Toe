@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const playerButtons = document.querySelectorAll(".player");
     const gameContainer = document.getElementById("game");
     const messageDisplay = document.getElementById("message");
@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", function() {
     let cells = [];
     let playerTurn = true;
 
+    const emojiToHouse = {
+        "🐍": "Slytherin",
+        "🦁": "Gryffindor",
+        "🦡": "Hufflepuff",
+        "🐦‍⬛": "Ravenclaw"
+    };
+
     function initializeGame() {
         cells = document.querySelectorAll(".cell");
         currentPlayerEmoji = "";
@@ -16,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
         computerEmoji = "";
         cells.forEach(cell => {
             cell.innerText = "";
-            cell.addEventListener("click", handleCellClick); 
+            cell.addEventListener("click", handleCellClick);
         });
         gameContainer.style.display = "none";
         playerButtons.forEach(button => button.style.display = "block");
@@ -51,8 +58,29 @@ document.addEventListener("DOMContentLoaded", function() {
         return Array.from(cells).every(cell => cell.innerText !== "");
     }
 
+    function resetGame() {
+        initializeGame();
+        messageDisplay.innerText = `Player's turn`;
+    }
+
+    function disableCells() {
+        cells.forEach(cell => cell.removeEventListener("click", handleCellClick));
+    }
+
+    function selectPlayer(event) {
+        currentPlayerEmoji = event.target.innerText;
+        currentPlayerHouse = emojiToHouse[currentPlayerEmoji];
+        gameContainer.style.display = "block";
+        messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
+        playerButtons.forEach(button => button.style.display = "none");
+        resetButton.style.display = "block";
+        const emojis = Array.from(playerButtons).map(button => button.innerText);
+        emojis.splice(emojis.indexOf(currentPlayerEmoji), 1);
+        computerEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+    }
+
     function handleCellClick(event) {
-        if (!playerTurn) return; 
+        if (!playerTurn) return;
         const clickedCell = event.target;
         if (clickedCell.innerText === "" && currentPlayerEmoji !== "") {
             clickedCell.innerText = currentPlayerEmoji;
@@ -65,32 +93,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentPlayerEmoji = currentPlayerEmoji;
                 currentPlayerHouse = currentPlayerHouse;
                 messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
-                playerTurn = false; 
+                playerTurn = false;
                 setTimeout(computerMove, 500);
             }
         }
-    }
-    
-    function resetGame() {
-        initializeGame();
-        messageDisplay.innerText = `Player's turn`;
-    }
-
-    function disableCells() {
-        cells.forEach(cell => cell.removeEventListener("click", handleCellClick));
-    }
-
-    function selectPlayer(event) {
-        currentPlayerEmoji = event.target.innerText;
-        currentPlayerHouse = currentPlayerEmoji === "🐍" ? "Slytherin" : currentPlayerEmoji === "🦁" ? "Gryffindor" : currentPlayerEmoji === "🦡" ? "Hufflepuff" : "Ravenclaw";
-        gameContainer.style.display = "block";
-        messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
-        playerButtons.forEach(button => button.style.display = "none");
-        resetButton.style.display = "block";
-        // Randomly select emoji for computer
-        const emojis = Array.from(playerButtons).map(button => button.innerText);
-        emojis.splice(emojis.indexOf(currentPlayerEmoji), 1);
-        computerEmoji = emojis[Math.floor(Math.random() * emojis.length)];
     }
 
     function computerMove() {
@@ -108,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentPlayerEmoji = currentPlayerEmoji;
                 currentPlayerHouse = currentPlayerHouse;
                 messageDisplay.innerText = `${currentPlayerHouse}'s turn`;
-                playerTurn = true; 
+                playerTurn = true;
             }
         }
     }
