@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
             clickedCell.innerText = currentPlayerEmoji;
             if (checkWin()) {
                 messageDisplay.innerText = `${currentPlayerHouse} wins!`;
+                document.getElementById("winSound").play(win.mp3); 
                 disableCells();
             } else if (checkTie()) {
                 messageDisplay.innerText = "It's a tie!";
@@ -115,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
             selectedCell.innerText = computerEmoji;
             if (checkWin()) {
                 messageDisplay.innerText = "Computer wins!";
+                document.getElementById("loseSound").play(lose.mp3); 
                 disableCells();
             } else if (checkTie()) {
                 messageDisplay.innerText = "It's a tie!";
