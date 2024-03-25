@@ -19,4 +19,5 @@ Instead of X's and O's. So, players would take turns placing their respective ho
 | Wednesday   |   | Add functionality,  Add styling,           |          |                 |
 | Thursday     |   | Finaliza MVP                       |          |                 |
 | Friday     |   |  Work on stretch goals, Presentation Day!                          |          |                 |
+
 -Pexals, Pixabay, Emojipedia
